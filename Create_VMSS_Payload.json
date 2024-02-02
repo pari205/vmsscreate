@@ -1,0 +1,62 @@
+{
+    "sku": {
+        "tier": "Standard",
+        "capacity": 1,
+        "name": "Standard_D1_v2"
+    },
+    "properties": {
+        "overprovision": true,
+        "virtualMachineProfile": {
+            "storageProfile": {
+                  "imageReference": {
+                            "publisher": "canonical",
+                            "offer": "0001-com-ubuntu-server-jammy",
+                            "sku": "22_04-lts-gen2",
+                            "version": "latest"
+                        },
+                "osDisk": {
+                    "caching": "ReadWrite",
+                    "managedDisk": {
+                        "storageAccountType": "Standard_LRS"
+                    },
+                    "createOption": "FromImage"
+                }
+            },
+            "osProfile": {
+                "computerNamePrefix": "VMSSTest",
+                "adminUsername": "scarf123",
+                "adminPassword": "scarf123"
+            },
+            "networkProfile": {
+                "networkInterfaceConfigurations": [
+                    {
+                        "name": "VMSSTest",
+                        "properties": {
+                            "primary": true,
+                            "enableIPForwarding": true,
+                            "ipConfigurations": [
+                                {
+                                    "name": "VMSSTest",
+                                    "properties": {
+                                        "subnet": {
+                                            "id": "/subscriptions/eb096cb4-34eb-4342-bf22-10e77ea1c9a2/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/default"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "upgradePolicy": {
+            "mode": "Manual"
+        }
+    },
+    "plan": {
+        "publisher": "canonical",
+        "product": "0001-com-ubuntu-server-jammy",
+        "name": "22_04-lts"
+    },
+    "location": "southindia"
+}
